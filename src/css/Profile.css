@@ -1,4 +1,112 @@
+.section-master-profile {
+  display: flex;
+  min-height: 100vh;
+}
+
+.section-profile {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 26.65vh);
+}
+
+.background-up-profile {
+  background-image: url('../img/fundo4.png');
+  background-size: cover;
+  display: flex;
+  height: 26.33vh;
+  width: 100%;
+}
+
+.background-up-profile img {
+  border-radius: 240px;
+  filter: drop-shadow(-9px 8px 8px rgba(68, 73, 85, 0.4));
+  height: 27.36vh;
+  margin-left: 8.3vh;
+  margin-right: 4.79vh;
+  margin-top: 12.65vh;
+  mix-blend-mode: normal;
+  width: 27.36vh;
+}
+
+.background-down-profile {
+  background: #e4e9f0;
+  display: flex;
+  min-height: 73.2vh;
+  width: 100%;
+}
+
+.loading-profile {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.loading-profile img {
+  height: 4.26vh;
+  margin-bottom: 1.59vh;
+  width: 4.26vh;
+}
+
+.loading-profile span {
+  color: #c0c3c9;
+  font-family: Epilogue , sans-serif;
+  font-size: 48.92px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 50px;
+  text-align: center;
+}
+
 .user-data {
   display: flex;
   flex-direction: column;
+  margin-left: 37.73vh;
+  margin-top: 3.19vh;
+  width: 100%;
+}
+
+.user-data h2 {
+  color: #3d495c;
+  font-family: Epilogue , sans-serif;
+  font-size: 1.7vh;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+}
+
+.user-data span {
+  color: #3d495c;
+  font-family: Epilogue , sans-serif;
+  font-size: 1.49vh;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  margin-bottom: 1.97vh;
+  text-align: left;
+  width: 52.23vh;
+}
+
+.description {
+  margin-top: 1.06vh;
+}
+
+.link-user-data {
+  background-color: #003be5;
+  border-radius: 100px;
+  color: white;
+  font-family: Epilogue , sans-serif;
+  font-size: 1.49vh;
+  font-style: normal;
+  font-weight: 700;
+  height: 4.26vh;
+  letter-spacing: 0.03em;
+  line-height: 1.49vh;
+  padding: 1.6vh 0;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 16.2vh;
 }

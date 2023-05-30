@@ -1,3 +1,110 @@
 .name-login {
-  resize: none;
+  border: 1px solid #003be5;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #003be5;
+  font-family: Epilogue , sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  height: 40px;
+  left: 440px;
+  margin-bottom: 10px;
+  outline: none;
+  text-align: center;
+  top: 415px;
+  width: 400px;
+}
+
+.button-login {
+  background: #003be5;
+  border-radius: 100px;
+  color: white;
+  font-family: Epilogue , sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  height: 40px;
+  left: 440px;
+  letter-spacing: 0.03em;
+  line-height: 14px;
+  outline: none;
+  text-align: center;
+  text-transform: uppercase;
+  top: 464px;
+  width: 400px;
+}
+
+.button-login:disabled {
+  background: gray;
+}
+
+.name-login::placeholder {
+  color: #003be5;
+  font-family: Epilogue , sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  text-align: center;
+}
+
+.login-page {
+  align-items: center;
+  background-image: url('../img/fundo.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container-login {
+  align-items: center;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 0 26px rgba(68, 73, 85, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 450px;
+  justify-content: center;
+  left: 265px;
+  top: 135px;
+  width: 750px;
+}
+
+.loading-login {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.loading-login img {
+  height: 4.26vh;
+  margin-bottom: 1.59vh;
+  width: 4.26vh;
+}
+
+.loading-login span {
+  color: #c0c3c9;
+  font-family: Epilogue , sans-serif;
+  font-size: 5.21vh;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 50px;
+  text-align: center;
+}
+
+.logo-trybetunes {
+  height: 104.89px;
+  left: 546.81px;
+  margin-bottom: 65px;
+  top: 245px;
+  width: 187.19px;
+}
+
+.form-login {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

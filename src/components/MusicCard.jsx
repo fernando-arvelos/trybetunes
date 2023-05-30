@@ -67,7 +67,10 @@ class MusicCard extends Component {
         </audio>
 
         {isLoading
-          ? <Loading />
+          ? (
+            <div className="loading-favorite">
+              <Loading />
+            </div>)
           : (
             <label
               htmlFor={ `fav-${trackId}` }
@@ -78,20 +81,21 @@ class MusicCard extends Component {
                 data-testid={ `checkbox-music-${trackId}` }
                 checked={ isChecked }
                 onChange={ (event) => this.handleChange(event) }
+                style={ { display: 'none' } }
               />
-              <p>
+              <p className="heart-fav">
                 {
                   isChecked
                     ? (
                       <AiFillHeart
-                        size={ 25 }
-                        color="red"
+                        size={ 20 }
+                        color="#EC5050"
                       />
                     )
 
                     : (
                       <AiOutlineHeart
-                        size={ 25 }
+                        size={ 20 }
                       />
                     )
                 }

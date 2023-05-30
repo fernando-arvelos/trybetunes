@@ -1,10 +1,12 @@
 import { Component } from 'react';
-import { isEmail } from 'validator'; // Importar isEmail do validator
+import { isEmail } from 'validator';
 import PropTypes from 'prop-types';
 import { getUser, updateUser } from '../services/userAPI';
-import Header from '../components/Header';
+import fundobranco from '../img/fundobranco.png';
 import Loading from '../components/Loading';
 import '../css/ProfileEdit.css';
+import Header from '../components/Header';
+import ampulheta from '../img/ampulheta.gif';
 
 class ProfileEdit extends Component {
   constructor() {
@@ -74,82 +76,96 @@ class ProfileEdit extends Component {
   render() {
     const { userData, isLoading, disabledButton } = this.state;
     const { name, email, image, description } = userData;
+    const number = 5;
     return (
-      <>
-        <div data-testid="page-profile-edit">
-          <Header />
-        </div>
+      <section className="section-master-profileedit">
+        <Header />
 
-        <div>
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <div>
-              <p>Editar perfil</p>
-              <div>
-                <img
-                  src={ image }
-                  alt={ `Foto do usuário ${name}` }
-                  data-testid="profile-image"
-                />
+        <section className="section-profileedit">
 
-                <input
+          <div className="background-up-profileedit">
+            <div className="img-input-profile-edit">
+              {image.length > number
+                ? (
+                  <img
+                    src={ image }
+                    alt={ `Foto do usuário ${name}` }
+                  />)
+                : (
+                  <img src={ fundobranco } alt="" />
+                )}
+
+              {!isLoading
+                && <input
                   name="image"
                   type="text"
                   placeholder="Insira um link da sua foto"
-                  data-testid="edit-input-image"
                   defaultValue={ image || '' }
                   onChange={ this.handleInputChange }
-                />
-              </div>
-
-              <form>
-                <ul className="form-profile-edit">
-                  <span>Nome</span>
-                  <span>Fique a vontade para usar seu nome social</span>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Digite seu nome"
-                    data-testid="edit-input-name"
-                    defaultValue={ name || '' }
-                    onChange={ this.handleInputChange }
-                  />
-
-                  <span>E-mail</span>
-                  <span>Escolha um e-mail que consulte diariamente</span>
-                  <input
-                    type="text"
-                    name="email"
-                    placeholder="user@email.com.br"
-                    data-testid="edit-input-email"
-                    defaultValue={ email || '' }
-                    onChange={ this.handleInputChange }
-                  />
-
-                  <span>Descrição</span>
-                  <textarea
-                    name="description"
-                    placeholder="Digite algo sobre você"
-                    data-testid="edit-input-description"
-                    defaultValue={ description || '' }
-                    onChange={ this.handleInputChange }
-                  />
-                </ul>
-
-                <button
-                  type="submit"
-                  data-testid="edit-button-save"
-                  disabled={ disabledButton }
-                  onClick={ this.handleSubmit }
-                >
-                  Salvar
-                </button>
-              </form>
+                />}
             </div>
-          )}
-        </div>
-      </>
+          </div>
+
+          <div className="background-down-profileedit">
+            {isLoading
+              ? (
+                <div className="loading-profileedit">
+                  <img
+                    src={ ampulheta }
+                    alt="ampulheta"
+                  />
+                  <Loading />
+                </div>
+              ) : (
+                <div className="edit-user-data">
+                  <form>
+                    <h1>Nome</h1>
+                    <p>Fique a vontade para usar seu nome social</p>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Digite seu nome"
+                      data-testid="edit-input-name"
+                      defaultValue={ name || '' }
+                      onChange={ this.handleInputChange }
+                    />
+
+                    <h1>E-mail</h1>
+                    <p>Escolha um e-mail que consulte diariamente</p>
+                    <input
+                      type="text"
+                      name="email"
+                      placeholder="user@email.com.br"
+                      data-testid="edit-input-email"
+                      defaultValue={ email || '' }
+                      onChange={ this.handleInputChange }
+                    />
+
+                    <h1>Descrição</h1>
+                    <textarea
+                      name="description"
+                      placeholder="Sobre mim"
+                      data-testid="edit-input-description"
+                      defaultValue={ description || '' }
+                      onChange={ this.handleInputChange }
+                    />
+                    <br />
+
+                    <button
+                      type="submit"
+                      data-testid="edit-button-save"
+                      disabled={ disabledButton }
+                      onClick={ this.handleSubmit }
+                    >
+                      Salvar
+                    </button>
+                  </form>
+                </div>
+              )}
+          </div>
+
+        </section>
+      </section>
     );
   }
 }
