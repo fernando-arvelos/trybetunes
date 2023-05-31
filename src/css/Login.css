@@ -1,58 +1,9 @@
-.name-login {
-  border: 1px solid #003be5;
-  border-radius: 100px;
-  box-sizing: border-box;
-  color: #003be5;
-  font-family: Epilogue , sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  height: 40px;
-  left: 440px;
-  margin-bottom: 10px;
-  outline: none;
-  text-align: center;
-  top: 415px;
-  width: 400px;
-}
-
-.button-login {
-  background: #003be5;
-  border-radius: 100px;
-  color: white;
-  font-family: Epilogue , sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  height: 40px;
-  left: 440px;
-  letter-spacing: 0.03em;
-  line-height: 14px;
-  outline: none;
-  text-align: center;
-  text-transform: uppercase;
-  top: 464px;
-  width: 400px;
-}
-
-.button-login:disabled {
-  background: gray;
-}
-
-.name-login::placeholder {
-  color: #003be5;
-  font-family: Epilogue , sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 14px;
-  text-align: center;
-}
-
-.login-page {
+.page-login {
   align-items: center;
   background-image: url('../img/fundo.png');
   background-repeat: no-repeat;
   background-size: cover;
+  border: 2px solid red;
   display: flex;
   justify-content: center;
   min-height: 100vh;
@@ -61,15 +12,14 @@
 .container-login {
   align-items: center;
   background: white;
+  border: 2px solid black;
   border-radius: 20px;
-  box-shadow: 0 0 26px rgba(68, 73, 85, 0.2);
+  box-shadow: 0 0 26px rgba(68, 73, 85, 0.4);
   display: flex;
-  flex-direction: column;
-  height: 450px;
+  height: 47.97vh;
   justify-content: center;
-  left: 265px;
-  top: 135px;
-  width: 750px;
+  margin: 1.49vh;
+  width: 79.95vh;
 }
 
 .loading-login {
@@ -94,17 +44,96 @@
   text-align: center;
 }
 
-.logo-trybetunes {
-  height: 104.89px;
-  left: 546.81px;
-  margin-bottom: 65px;
-  top: 245px;
-  width: 187.19px;
-}
-
 .form-login {
   align-items: center;
+  border: 2px solid blue;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 1.49vh;
+}
+
+.form-login img {
+  height: 11.08vh;
+  margin-bottom: 6.92vh;
+  width: 19.93vh;
+}
+
+.form-login form {
+  align-items: center;
+  border: 2px solid yellow;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1.3vh;
+}
+
+.form-login form input {
+  border: 1px solid #003be5;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #003be5;
+  font-family: Epilogue , sans-serif;
+  font-size: 1.49vh;
+  font-weight: 700;
+  height: 4.26vh;
+  margin-bottom: 1.06vh;
+  text-align: center;
+  width: 42.64vh;
+}
+
+.form-login form input::placeholder {
+  color: #003be5;
+  font-family: Epilogue , sans-serif;
+  font-size: 1.49vh;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.49vh;
+  text-align: center;
+}
+
+.form-login button {
+  background: #003be5;
+  border-radius: 100px;
+  color: white;
+  font-family: Epilogue , sans-serif;
+  font-size: 1.49vh;
+  font-style: normal;
+  font-weight: 700;
+  height: 4.26vh;
+  letter-spacing: 0.03em;
+  line-height: 1.49vh;
+  outline: none;
+  text-align: center;
+  text-transform: uppercase;
+  width: 42.64vh;
+}
+
+.form-login button:disabled {
+  background: gray;
+}
+
+@media ( max-width : 600px ) {
+
+  .container-login {
+    height: 31.97vh;
+    width: 39.78vh;
+  }
+
+  .form-login img {
+    height: 8.08vh;
+    margin-bottom: 4.92vh;
+    width: 12.93vh;
+  }
+
+  .form-login form input {
+    height: 4.26vh;
+    width: 32.64vh;
+  }
+
+  .form-login button {
+    height: 4.26vh;
+    width: 32.64vh;
+  }
+
 }

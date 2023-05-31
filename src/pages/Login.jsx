@@ -41,9 +41,8 @@ class Login extends Component {
     const charUser = 3;
 
     return (
-      <div className="login-page">
+      <section className="page-login">
         <div className="container-login">
-          <img src={ logo } alt="logo" className="logo-trybetunes" />
           {loading
             ? (
               <div className="loading-login">
@@ -54,12 +53,11 @@ class Login extends Component {
                 <Loading />
               </div>)
             : (
-              <div data-testid="page-login" className="login">
-
-                <form className="form-login">
+              <div className="form-login">
+                <img src={ logo } alt="logo" />
+                <form>
                   <input
                     data-testid="login-name-input"
-                    className="name-login"
                     placeholder="Qual é o seu nome?"
                     onChange={ this.handleChange }
                     name="userName"
@@ -67,7 +65,6 @@ class Login extends Component {
                   <button
                     type="submit"
                     data-testid="login-submit-button"
-                    className="button-login"
                     onClick={ this.createNameUser }
                     disabled={ userName.length < charUser }
                   >
@@ -77,7 +74,7 @@ class Login extends Component {
               </div>
             )}
         </div>
-      </div>
+      </section>
     );
   }
 }
