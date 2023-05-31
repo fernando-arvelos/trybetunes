@@ -109,7 +109,7 @@
   background: gray;
 }
 
-@media ( max-width : 600px ) {
+/* @media ( max-width : 600px ) {
 
   .container-login {
     height: 31.97vh;
@@ -132,4 +132,4 @@
     width: 32.64vh;
   }
 
-}
+} */
