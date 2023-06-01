@@ -1,14 +1,14 @@
 import { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { AiOutlineStar } from 'react-icons/ai';
-import { RxMagnifyingGlass } from 'react-icons/rx';
 import { CgProfile } from 'react-icons/cg';
+import { Flex, Icon, Image, Link, Text } from '@chakra-ui/react';
+import { SearchIcon } from '@chakra-ui/icons';
 import { getUser } from '../services/userAPI';
 import Loading from './Loading';
 import logo from '../img/logo.png';
 import ampulheta from '../img/ampulheta.gif';
 import fundobranco from '../img/fundobranco.png';
-import '../css/Header.css';
 
 class Header extends Component {
   constructor() {
@@ -17,7 +17,7 @@ class Header extends Component {
     this.state = {
       nameUser: '',
       imageUser: '',
-      loading: false,
+      loading: true,
     };
   }
 
@@ -26,7 +26,6 @@ class Header extends Component {
   }
 
   getNameUser = async () => {
-    this.setState({ loading: true });
     const getNameUser = await getUser();
     this.setState({
       nameUser: getNameUser.name,
@@ -38,74 +37,112 @@ class Header extends Component {
   render() {
     const { nameUser, imageUser, loading } = this.state;
     return (
-      <section className="section-header">
+      <Flex
+        minH="100vh"
+        w="250px"
+        direction="column"
+        align="center"
+        justify="space-between"
+      >
 
-        <div className="logo-header">
-          <img src={ logo } alt="logo" />
-        </div>
+        <Flex align="center" mt="34px">
+          <Image
+            src={ logo }
+            alt="logo"
+            w="170px"
+            mb="40px"
+          />
+        </Flex>
 
-        <header data-testid="header-component" className="header">
+        <Flex
+          direction="column"
+          w="100%"
+          h="100%"
+          justify="space-evenly"
+          ml="40px"
+        >
+          <Flex align="center">
+            <SearchIcon color="#5C606A" w="50px" />
+            <Link
+              as={ RouterLink }
+              to="/search"
+              fontWeight="700"
+              fontSize="16px"
+              letterSpacing="0.03em"
+              textTransform="capitalize"
+              color="#444955"
+            >
+              Pesquisa
+            </Link>
+          </Flex>
 
-          <div className="links-other-pages">
-            <div className="link-search">
-              <RxMagnifyingGlass className="lupa" />
-              <Link
-                data-testid="link-to-search"
-                to="/search"
-                className="search"
-              >
-                Pesquisa
-              </Link>
-            </div>
+          <Flex align="center">
+            <Icon as={ AiOutlineStar } color="C0C3C9" w="50px" />
+            <Link
+              as={ RouterLink }
+              to="/favorites"
+              fontWeight="400"
+              fontSize="16px"
+              letterSpacing="0.03em"
+              textTransform="capitalize"
+              color="#444955"
+            >
+              Favoritas
+            </Link>
+          </Flex>
 
-            <div className="link-favorites">
-              <AiOutlineStar className="star" />
-              <Link
-                data-testid="link-to-favorites"
-                to="/favorites"
-                className="favorites"
-              >
-                Favoritas
-              </Link>
-            </div>
+          <Flex align="center">
+            <Icon as={ CgProfile } color="C0C3C9" w="50px" />
+            <Link
+              as={ RouterLink }
+              to="/profile"
+              fontWeight="400"
+              fontSize="16px"
+              letterSpacing="0.03em"
+              textTransform="capitalize"
+              color="#444955"
+            >
+              Perfil
+            </Link>
+          </Flex>
+        </Flex>
 
-            <div className="link-profile">
-              <CgProfile className="avatar" />
-              <Link
-                data-testid="link-to-profile"
-                to="/profile"
-                className="profile"
-              >
-                Perfil
-              </Link>
-            </div>
-          </div>
-
-          <div className="footer-header">
-            <div className="user-header">
-              {loading ? (
-                <div className="loading-user">
-                  <img
-                    src={ ampulheta }
-                    alt="ampulheta"
+        <Flex mb="40px" w="100%">
+          {loading ? (
+            <Flex align="center" ml="40px" h="50px">
+              <Image
+                src={ ampulheta }
+                alt="ampulheta"
+                mr="13px"
+                w="30px"
+              />
+              <Loading color="#003BE5" size={ ['16px'] } />
+            </Flex>
+          ) : (
+            <Flex align="center" ml="40px" h="50px">
+              {imageUser && imageUser.length > 0
+                ? (
+                  <Image
+                    src={ imageUser }
+                    alt={ `Foto do usuário ${nameUser}` }
+                    w="40px"
+                    borderRadius="full"
+                    mr="13px"
                   />
-                  <Loading />
-                </div>
-              ) : (
-                <>
-                  {imageUser.length > 0
-                    ? (
-                      <img src={ imageUser } alt={ `Foto do usuário ${nameUser}` } />
-                    ) : (
-                      <img src={ fundobranco } alt="" />
-                    )}
-                  <p>{nameUser}</p>
-                </>
-              )}
-            </div>
-          </div>
-        </header>
-      </section>
+                ) : (
+                  <Image
+                    src={ fundobranco }
+                    alt=""
+                    w="0px"
+                    borderRadius="full"
+                    mr="13px"
+                  />
+                )}
+              <Text>{nameUser}</Text>
+            </Flex>
+          )}
+        </Flex>
+      </Flex>
     );
   }
 }

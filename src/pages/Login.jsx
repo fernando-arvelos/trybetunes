@@ -49,11 +49,8 @@ class Login extends Component {
         h="100vh"
         bgImage={ fundo }
         bgSize="cover"
-        border="2px"
       >
         <Flex
-          border="2px"
-          borderColor="red"
           bgColor="white"
           align="center"
           justify="center"
@@ -87,7 +84,7 @@ class Login extends Component {
                   src={ logo }
                   alt="logo"
                   w={ ['110px', '110px', '187px', '187px'] }
-                  marginBottom={ ['30px', '30px', '68px', '68px'] }
+                  mb={ ['30px', '30px', '68px', '75px'] }
                 />
                 <FormControl
                   display="flex"
@@ -107,6 +104,7 @@ class Login extends Component {
                     placeholder="Qual é o seu nome?"
                     _placeholder={ { opacity: 0.5, color: '#003BE5' } }
                     variant="unstyled"
+                    mb="5px"
                     w={ ['290px', '290px', '400px', '400px'] }
                     h={ ['35px', '35px', '40px', '40px'] }
                   />
