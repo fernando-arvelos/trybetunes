@@ -1,9 +1,12 @@
+/* eslint-disable no-magic-numbers */
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button, Flex, FormControl, Image, Input } from '@chakra-ui/react';
 import { createUser } from '../services/userAPI';
 import Loading from '../components/Loading';
 import logo from '../img/logo.png';
 import ampulheta from '../img/ampulheta.gif';
+import fundo from '../img/fundo.png';
 
 class Login extends Component {
   constructor() {
@@ -40,54 +43,92 @@ class Login extends Component {
     const charUser = 3;
 
     return (
-      <section
-        className="h-screen flex justify-center items-center bg-fundo bg-cover"
+      <Flex
+        justify="center"
+        align="center"
+        h="100vh"
+        bgImage={ fundo }
+        bgSize="cover"
+        border="2px"
       >
-        <div
-          className="rounded-2xl mx-20 bg-white w-96 h-60
-           flex items-center justify-center md:w-750 md:h-450"
+        <Flex
+          border="2px"
+          borderColor="red"
+          bgColor="white"
+          align="center"
+          justify="center"
+          borderRadius="2xl"
+          mx="3"
+          w={ ['350px', '350px', '750px', '750px'] }
+          h={ ['220px', '220px', '450px', '450px'] }
         >
           {loading
             ? (
-              <div className="loading-login">
-                <img
+              <Flex
+                align="center"
+                direction="column"
+                w="100%"
+              >
+                <Image
                   src={ ampulheta }
                   alt="ampulheta"
+                  boxSize={ ['30px', '30px', '55px', '55px'] }
+
                 />
-                <Loading />
-              </div>)
+                <Loading color="#C0C3C9" size={ [35, 35, 90, 90] } />
+              </Flex>)
             : (
-              <div
-                className="flex items-center justify-center flex-col"
+              <Flex
+                align="center"
+                justify="center"
+                direction="column"
               >
-                <img src={ logo } alt="logo" className="w-128 mb-9 md:w-187 md:mb-65" />
-                <form className="flex items-center justify-center flex-col">
-                  <input
+                <Image
+                  src={ logo }
+                  alt="logo"
+                  w={ ['110px', '110px', '187px', '187px'] }
+                  marginBottom={ ['30px', '30px', '68px', '68px'] }
+                />
+                <FormControl
+                  display="flex"
+                  alignItems="center"
+                  flexDirection="column"
+                >
+                  <Input
                     data-testid="login-name-input"
-                    placeholder="Qual é o seu nome?"
                     onChange={ this.handleChange }
                     name="userName"
-                    className="border-blue-700 border rounded-3xl
-                      placeholder:text-blue-600 placeholder: text-center outline-none
-                      text-blue-700 text-sm font-semibold w-60 h-8 mb-2 md:w-400
-                      md:h-40 md:mb-9"
+                    color="#003BE5"
+                    border="1px"
+                    borderRadius="100px"
+                    textAlign="center"
+                    fontSize="14px"
+                    fontWeight="bold"
+                    placeholder="Qual é o seu nome?"
+                    _placeholder={ { opacity: 0.5, color: '#003BE5' } }
+                    variant="unstyled"
+                    w={ ['290px', '290px', '400px', '400px'] }
+                    h={ ['35px', '35px', '40px', '40px'] }
                   />
-                  <button
+                  <Button
                     type="submit"
                     data-testid="login-submit-button"
                     onClick={ this.createNameUser }
-                    disabled={ userName.length < charUser }
-                    className="rounded-3xl
-                    bg-blue-700 text-center outline-none md:w-400 md:h-40
-                    text-white text-sm font-semibold w-60 h-8"
+                    isDisabled={ userName.length < charUser }
+                    bgColor="#003BE5"
+                    color="white"
+                    borderRadius="100px"
+                    _disabled={ { bg: 'gray' } }
+                    w={ ['290px', '290px', '400px', '400px'] }
+                    h={ ['35px', '35px', '40px', '40px'] }
                   >
                     Entrar
-                  </button>
-                </form>
-              </div>
+                  </Button>
+                </FormControl>
+              </Flex>
             )}
-        </div>
-      </section>
+        </Flex>
+      </Flex>
     );
   }
 }
