@@ -38,7 +38,7 @@ class Header extends Component {
     const { nameUser, imageUser, loading } = this.state;
     return (
       <Flex
-        minH="100vh"
+        h={ ['85vh', '85vh', '85vh', '100vh'] }
         w="250px"
         direction="column"
         align="center"

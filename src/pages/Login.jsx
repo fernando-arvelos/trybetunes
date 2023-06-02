@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Flex, FormControl, Image, Input } from '@chakra-ui/react';
@@ -69,10 +68,10 @@ class Login extends Component {
                 <Image
                   src={ ampulheta }
                   alt="ampulheta"
-                  boxSize={ ['30px', '30px', '55px', '55px'] }
+                  boxSize={ ['30px', '30px', '50px', '50px'] }
 
                 />
-                <Loading color="#C0C3C9" size={ [35, 35, 90, 90] } />
+                <Loading color="#C0C3C9" size={ ['35px', '35px', '70px', '70px'] } />
               </Flex>)
             : (
               <Flex

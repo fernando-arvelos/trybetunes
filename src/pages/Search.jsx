@@ -1,10 +1,15 @@
 import { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+import { Box, Flex, Heading, Text } from '@chakra-ui/layout';
+import { Button, FormControl, Image, Input, Link } from '@chakra-ui/react';
 import Header from '../components/Header';
-import '../css/Search.css';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from '../components/Loading';
 import ampulheta from '../img/ampulheta.gif';
+import HiddenMenu from '../components/HiddenMenu';
+import fundo1 from '../img/fundo4.png';
+import { buttonStyles } from '../components/ButtonSearch';
+import { inputSearch } from '../components/InputSearch';
 
 class Search extends Component {
   constructor() {
@@ -16,8 +21,24 @@ class Search extends Component {
       loading: false,
       notFound: false,
       albums: [],
+      isMobile: true,
     };
   }
+
+  componentDidMount() {
+    this.checkIsMobile();
+    window.addEventListener('resize', this.checkIsMobile);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.checkIsMobile);
+  }
+
+  checkIsMobile = () => {
+    const sizeScreen = 960;
+    const isMobile = window.innerWidth < sizeScreen;
+    this.setState({ isMobile });
+  };
 
   handleChange = ({ target }) => {
     const { name, value } = target;
@@ -45,68 +66,114 @@ class Search extends Component {
 
   render() {
     const { artistName, loading,
-      resultArtist, albums, notFound } = this.state;
+      resultArtist, albums, notFound, isMobile } = this.state;
     const charArtistName = 2;
 
     return (
-      <section className="section-master-search">
-        <Header />
-        <section className="section-search">
-          <div className="background-up-search">
+      <Flex minH="100%">
+        {!isMobile
+          && <Header />}
+        <Flex
+          w={ ['100%', '100%', 'calc(100% - 250px)', 'calc(100% - 250px)'] }
+          direction="column"
+          align="flex-end"
+          minH="100vh"
+        >
+          <Flex
+            justify={ ['none', 'none', 'center', 'center'] }
+            bgImage={ fundo1 }
+            bgSize="cover"
+            h="178px"
+            w="100%"
+            direction="column"
+          >
+            {isMobile
+            && (
+              <Flex
+                zIndex="2"
+                mt="10px"
+                ml="10px"
+              >
+                <HiddenMenu />
+              </Flex>)}
 
-            <form className="form-search">
-              <input
-                data-testid="search-artist-input"
-                className="search-artist"
-                placeholder="Nome do Artista"
+            <FormControl
+              display="flex"
+              justifyContent="center"
+              mt="20px"
+            >
+              <Input
                 name="artistName"
                 value={ artistName }
                 onChange={ this.handleChange }
+                placeholder="Nome do Artista"
+                { ...inputSearch.baseStyle }
               />
 
-              <button
+              <Button
                 type="button"
                 data-testid="search-artist-button"
                 onClick={ () => {
                   this.searchAlbums();
                   this.clearInput();
                 } }
-                disabled={ artistName.length < charArtistName }
+                isDisabled={ artistName.length < charArtistName }
+                _disabled={ { bg: 'gray.400', color: 'black' } }
+                { ...buttonStyles.baseStyle }
               >
                 Procurar
-              </button>
-            </form>
-          </div>
+              </Button>
+            </FormControl>
+          </Flex>
 
-          <div className="background-down-search">
+          <Flex bg="#e4e9f0" minH="calc(100% - 178px)" w="100%">
             {loading
               ? (
-                <div className="loading-search">
-                  <img
+                <Flex align="center" justify="center" direction="column" w="100%">
+                  <Image
                     src={ ampulheta }
                     alt="ampulheta"
+                    boxSize={ ['30px', '30px', '50px', '50px'] }
                   />
-                  <Loading />
-                </div>)
+                  <Loading color="#C0C3C9" size={ ['35px', '35px', '70px', '70px'] } />
+                </Flex>)
               : (
-                <div className="page-down">
+                <Box w="100%">
                   {notFound
                     ? (
-                      <div className="album-notfound">
-                        <h1 className="no-album">Nenhum álbum foi encontrado</h1>
-                      </div>)
+                      <Flex align="center" justify="center" h="100%" w="100%">
+                        <Heading
+                          as="h1"
+                          color="#c0c3c9"
+                          fontSize={ ['15px', '15px', '30px', '30px'] }
+                          fontWeight="400"
+                        >
+                          Nenhum álbum foi encontrado
+                        </Heading>
+                      </Flex>)
                     : (albums.length > 0
                       && (
-                        <div className="list-albuns">
-                          <div className="result-album">
-                            <h3>
+                        <Flex align="center" direction="column" justify="center">
+                          <Box mt="63px">
+                            <Text
+                              color="#003be5"
+                              fontSize={ ['15px', '15px', '20px', '20px'] }
+                              fontStyle="italic"
+                              fontWeight="300"
+                              textAlign="center"
+                            >
                               {`Resultado de álbuns de ${resultArtist.charAt(0)
                                 .toUpperCase() + resultArtist.slice(1)}:`}
-                            </h3>
-                          </div>
-                          <div className="albums">
+                            </Text>
+                          </Box>
+                          <Flex
+                            wrap="wrap"
+                            justify="center"
+                            mt="52.11px"
+                          >
                             {albums.map((album, index) => (
                               <Link
+                                as={ RouterLink }
                                 key={ index }
                                 data-testid={ `link-to-album-${album.collectionId}` }
                                 to={ {
@@ -114,29 +181,55 @@ class Search extends Component {
                                   state: { resultArtist: albums },
                                 } }
                                 className="link"
+                                textDecor="none"
+                                _hover={ { textDecor: 'none' } }
                               >
 
-                                <img
+                                <Image
                                   src={ album.artworkUrl100 }
                                   alt={
                                     `Imagem da capa do álbum ${album.collectionName}`
                                   }
+                                  borderRadius="10px"
+                                  boxSize="200px"
+                                  mr={ ['0px', '0px', '25px', '25px'] }
+                                  mb="3px"
+                                  mixBlendMode="normal"
                                 />
-                                <h4>{album.collectionName}</h4>
-                                <p>{album.artistName}</p>
+                                <Text
+                                  color="#3d495c"
+                                  fontSize="12px"
+                                  fontWeight="700"
+                                  h="35px"
+                                  w="200px"
+                                  lineHeight="150%"
+                                >
+                                  {album.collectionName}
+                                </Text>
+                                <Text
+                                  color="#3d495c"
+                                  fontSize="12px"
+                                  fontWeight="400"
+                                  h="14px"
+                                  w="147px"
+                                  lineHeight="150%"
+                                  mb="25px"
+                                >
+                                  {album.artistName}
+                                </Text>
 
                               </Link>
                             ))}
-                          </div>
-                        </div>)
+                          </Flex>
+                        </Flex>)
 
                     )}
-                </div>
+                </Box>
               )}
-          </div>
+          </Flex>
 
-        </section>
-      </section>
+        </Flex>
+      </Flex>
     );
   }
 }
