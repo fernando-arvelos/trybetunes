@@ -153,7 +153,12 @@ class Search extends Component {
                       </Flex>)
                     : (albums.length > 0
                       && (
-                        <Flex align="center" direction="column" justify="center">
+                        <Flex
+                          align="center"
+                          direction="column"
+                          justify="center"
+                          border="2px"
+                        >
                           <Box mt="63px">
                             <Text
                               color="#003be5"
@@ -183,6 +188,7 @@ class Search extends Component {
                                 className="link"
                                 textDecor="none"
                                 _hover={ { textDecor: 'none' } }
+                                display={ ['flex', 'inline', 'inline', 'inline'] }
                               >
 
                                 <Image
@@ -191,33 +197,40 @@ class Search extends Component {
                                     `Imagem da capa do álbum ${album.collectionName}`
                                   }
                                   borderRadius="10px"
-                                  boxSize="200px"
-                                  mr={ ['0px', '0px', '25px', '25px'] }
-                                  mb="3px"
+                                  boxSize={ ['100px', '200px', '200px', '200px'] }
+                                  mr={ ['6px', '25px', '25px', '25px'] }
+                                  mb={ ['6px', '3px'] }
                                   mixBlendMode="normal"
                                 />
-                                <Text
-                                  color="#3d495c"
-                                  fontSize="12px"
-                                  fontWeight="700"
-                                  h="35px"
-                                  w="200px"
-                                  lineHeight="150%"
+                                <Flex
+                                  direction="column"
+                                  justify={ ['flex-end', 'flex-start'] }
+                                  w={ ['200px', '200px', '200px', '200px'] }
+                                  h={ ['100px', '60px', '60px', '60px'] }
                                 >
-                                  {album.collectionName}
-                                </Text>
-                                <Text
-                                  color="#3d495c"
-                                  fontSize="12px"
-                                  fontWeight="400"
-                                  h="14px"
-                                  w="147px"
-                                  lineHeight="150%"
-                                  mb="25px"
-                                >
-                                  {album.artistName}
-                                </Text>
-
+                                  <Text
+                                    color="#3d495c"
+                                    fontSize="12px"
+                                    fontWeight="700"
+                                    h="35px"
+                                    w="200px"
+                                    lineHeight="150%"
+                                    mb="3px"
+                                  >
+                                    {album.collectionName}
+                                  </Text>
+                                  <Text
+                                    color="#3d495c"
+                                    fontSize="12px"
+                                    fontWeight="400"
+                                    h="14px"
+                                    w="200px"
+                                    lineHeight="150%"
+                                    mb="25px"
+                                  >
+                                    {album.artistName}
+                                  </Text>
+                                </Flex>
                               </Link>
                             ))}
                           </Flex>

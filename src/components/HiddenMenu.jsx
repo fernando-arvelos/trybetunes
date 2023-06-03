@@ -35,7 +35,6 @@ export default class HiddenMenu extends Component {
           fontSize="30px"
           _hover={ { color: 'white', border: '2px', borderColor: 'white' } }
           _focus={ { bg: 'transparent' } }
-          zIndex="2"
           onClick={ this.handleButtonClick }
         />
         <motion.div

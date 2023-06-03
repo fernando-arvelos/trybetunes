@@ -118,6 +118,7 @@ class Login extends Component {
                     _disabled={ { bg: 'gray' } }
                     w={ ['290px', '290px', '400px', '400px'] }
                     h={ ['35px', '35px', '40px', '40px'] }
+                    _hover="none"
                   >
                     Entrar
                   </Button>
