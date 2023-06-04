@@ -8,8 +8,9 @@ import Loading from '../components/Loading';
 import ampulheta from '../img/ampulheta.gif';
 import HiddenMenu from '../components/HiddenMenu';
 import fundo1 from '../img/fundo4.png';
-import { buttonStyles } from '../components/ButtonSearch';
-import { inputSearch } from '../components/InputSearch';
+import { buttonSearch } from '../styles/ButtonSearch';
+import { inputSearch } from '../styles/InputSearch';
+import { textSearch } from '../styles/TextSearch';
 
 class Search extends Component {
   constructor() {
@@ -21,7 +22,7 @@ class Search extends Component {
       loading: false,
       notFound: false,
       albums: [],
-      isMobile: true,
+      isMobile: false,
     };
   }
 
@@ -119,7 +120,7 @@ class Search extends Component {
                 } }
                 isDisabled={ artistName.length < charArtistName }
                 _disabled={ { bg: 'gray.400', color: 'black' } }
-                { ...buttonStyles.baseStyle }
+                { ...buttonSearch.baseStyle }
               >
                 Procurar
               </Button>
@@ -157,7 +158,6 @@ class Search extends Component {
                           align="center"
                           direction="column"
                           justify="center"
-                          border="2px"
                         >
                           <Box mt="63px">
                             <Text
@@ -209,24 +209,18 @@ class Search extends Component {
                                   h={ ['100px', '60px', '60px', '60px'] }
                                 >
                                   <Text
-                                    color="#3d495c"
-                                    fontSize="12px"
                                     fontWeight="700"
                                     h="35px"
-                                    w="200px"
-                                    lineHeight="150%"
                                     mb="3px"
+                                    { ...textSearch.baseStyle }
                                   >
                                     {album.collectionName}
                                   </Text>
                                   <Text
-                                    color="#3d495c"
-                                    fontSize="12px"
                                     fontWeight="400"
                                     h="14px"
-                                    w="200px"
-                                    lineHeight="150%"
                                     mb="25px"
+                                    { ...textSearch.baseStyle }
                                   >
                                     {album.artistName}
                                   </Text>

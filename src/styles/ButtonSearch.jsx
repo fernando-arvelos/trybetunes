@@ -1,4 +1,4 @@
-export const buttonStyles = {
+export const buttonSearch = {
   baseStyle: {
     bg: '#00d5e2',
     color: 'white',

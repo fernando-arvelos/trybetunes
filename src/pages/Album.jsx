@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Box, Flex, Text } from '@chakra-ui/layout';
+import { Image } from '@chakra-ui/react';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
-import '../css/Album.css';
 import Loading from '../components/Loading';
 import ampulheta from '../img/ampulheta.gif';
+import { AlbumCover } from '../styles/AlbumCover';
+import fundo2 from '../img/fundo2.png';
 
 class Album extends Component {
   constructor() {
@@ -15,12 +18,24 @@ class Album extends Component {
       musics: [],
       infoAlbum: {},
       isLoading: true,
+      isMobile: false,
     };
   }
 
   componentDidMount() {
     this.listMusics();
+    window.addEventListener('resize', this.checkIsMobile);
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.checkIsMobile);
+  }
+
+  checkIsMobile = () => {
+    const sizeScreen = 960;
+    const isMobile = window.innerWidth < sizeScreen;
+    this.setState({ isMobile });
+  };
 
   listMusics = async () => {
     const { match: { params: { id } } } = this.props;
@@ -33,53 +48,85 @@ class Album extends Component {
   };
 
   render() {
-    const { musics, infoAlbum, isLoading } = this.state;
+    const { musics, infoAlbum, isLoading, isMobile } = this.state;
     return (
-      <section className="section-master-album">
-        <Header />
-        <section className="section-album">
+      <Flex minH="100%">
+        {!isMobile
+          && <Header />}
+        <Flex
+          align="flex-end"
+          direction="column"
+          w={ ['100%', '100%', 'calc(100% - 250px)', 'calc(100% - 250px)'] }
+        >
 
-          <div className="background-up-album">
+          <Flex
+            bgImage={ fundo2 }
+            bgSize="cover"
+            h="178px"
+            w="100%"
+            zIndex={ 2 }
+          >
             {!isLoading
                 && (
                   <>
-                    <img
+                    <Image
                       src={ infoAlbum.artworkUrl100 }
                       alt={ `Imagem da capa do álbum ${infoAlbum.collectionName}` }
+                      { ...AlbumCover.baseStyle }
                     />
-                    <div className="data-album">
-                      <h3 data-testid="album-name">{ infoAlbum.collectionName}</h3>
-                      <p data-testid="artist-name">{ infoAlbum.artistName}</p>
-                    </div>
+                    <Flex
+                      direction="column"
+                      justify="flex-end"
+                      mt="29px"
+                      w="218.4px"
+                    >
+                      <Text
+                        color="white"
+                        fontSize="20px"
+                        fontWeight="700"
+                        lineHeight="150%"
+                      >
+                        { infoAlbum.collectionName}
+                      </Text>
+                      <Text
+                        color="white"
+                        fontSize="14px"
+                        fontWeight="400"
+                        lineHeight="150%"
+                      >
+                        { infoAlbum.artistName}
+                      </Text>
+                    </Flex>
                   </>
                 )}
-          </div>
+          </Flex>
 
-          <div className="background-down-album">
+          <Flex bg="#e4e9f0" minH="calc(100% - 178px)" w="100%">
             {isLoading
               ? (
-                <div className="loading-album">
-                  <img
+                <Flex align="center" justify="center" direction="column" w="100%">
+                  <Image
                     src={ ampulheta }
                     alt="ampulheta"
+                    boxSize={ ['30px', '30px', '50px', '50px'] }
                   />
-                  <Loading />
-                </div>)
+                  <Loading color="#C0C3C9" size={ ['35px', '35px', '70px', '70px'] } />
+                </Flex>)
               : (
-                <div className="list-music">
+                <Flex direction="column" m="38px 0 0 323px">
                   { musics.map((music) => (
-                    <div key={ music.trackId }>
+                    <Box key={ music.trackId }>
                       <MusicCard
                         music={ music }
                       />
-                    </div>
+                    </Box>
                   ))}
-                </div>
+                </Flex>
               )}
 
-          </div>
-        </section>
-      </section>
+          </Flex>
+        </Flex>
+      </Flex>
     );
   }
 }

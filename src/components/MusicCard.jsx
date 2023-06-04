@@ -2,8 +2,11 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import '../css/MusicCard.css';
+import { Box, Flex, Text } from '@chakra-ui/layout';
+import { Checkbox, FormLabel } from '@chakra-ui/react';
 import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
+import { PlayerMusicCard } from '../styles/PlayerMusicCard';
 
 class MusicCard extends Component {
   constructor() {
@@ -52,38 +55,45 @@ class MusicCard extends Component {
     const { trackName, previewUrl, trackId } = music;
     return (
 
-      <div className="player-music">
-        <p>{trackName}</p>
+      <Flex align="center">
+        <Text
+          { ...PlayerMusicCard.baseStyle }
+        >
+          {trackName}
+        </Text>
         <audio
-          data-testid="audio-component"
           src={ previewUrl }
           controls
+          style={ { height: '56px', width: '371px' } }
         >
           <track kind="captions" />
           O seu navegador não suporta o elemento
-          {' '}
           <code>audio</code>
           .
         </audio>
 
         {isLoading
           ? (
-            <div className="loading-favorite">
+            <Box
+              color="#003be5"
+              fontSize="11px"
+              fontWeight="400"
+              lineHeight="18px"
+            >
               <Loading />
-            </div>)
+            </Box>)
           : (
-            <label
+            <FormLabel
               htmlFor={ `fav-${trackId}` }
             >
-              <input
-                type="checkbox"
+              <Checkbox
                 id={ `fav-${trackId}` }
                 data-testid={ `checkbox-music-${trackId}` }
-                checked={ isChecked }
+                isChecked={ isChecked }
                 onChange={ (event) => this.handleChange(event) }
                 style={ { display: 'none' } }
               />
-              <p className="heart-fav">
+              <Text ml="52px">
                 {
                   isChecked
                     ? (
@@ -99,12 +109,11 @@ class MusicCard extends Component {
                       />
                     )
                 }
-              </p>
-              <span style={ { display: 'none' } }>Favorita</span>
-            </label>
+              </Text>
+            </FormLabel>
           )}
 
-      </div>
+      </Flex>
 
     );
   }
