@@ -92,8 +92,7 @@ class Search extends Component {
             && (
               <Flex
                 zIndex="2"
-                mt="10px"
-                ml="10px"
+                m="10px 0 0 10px"
               >
                 <HiddenMenu />
               </Flex>)}

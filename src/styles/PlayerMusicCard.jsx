@@ -5,6 +5,6 @@ export const PlayerMusicCard = {
     display: 'flex',
     fontSize: '14px',
     fontWeight: '400',
-    w: '182px',
+    w: ['300px', '182px', '182px', '182px'],
   },
 };

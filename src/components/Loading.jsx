@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import '../css/Loading.css';
 import { Box, Text } from '@chakra-ui/react';
 import { arrayOf, string } from 'prop-types';
 

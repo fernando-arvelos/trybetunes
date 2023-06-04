@@ -1,19 +1,17 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import '../css/MusicCard.css';
-import { Box, Flex, Text } from '@chakra-ui/layout';
+import { Flex, Text } from '@chakra-ui/layout';
 import { Checkbox, FormLabel } from '@chakra-ui/react';
 import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
-import Loading from './Loading';
 import { PlayerMusicCard } from '../styles/PlayerMusicCard';
+import '../css/MusicCard.css';
 
 class MusicCard extends Component {
   constructor() {
     super();
 
     this.state = {
-      isLoading: false,
       isChecked: false,
     };
   }
@@ -26,7 +24,6 @@ class MusicCard extends Component {
     const { music, onRemoveSong } = this.props;
     this.setState({
       isChecked: target.checked,
-      isLoading: true,
     });
 
     if (target.checked) {
@@ -35,10 +32,6 @@ class MusicCard extends Component {
       await removeSong(music);
       await onRemoveSong(music);
     }
-
-    this.setState({
-      isLoading: false,
-    });
   };
 
   getFavorites = async () => {
@@ -51,68 +44,59 @@ class MusicCard extends Component {
 
   render() {
     const { music } = this.props;
-    const { isChecked, isLoading } = this.state;
+    const { isChecked } = this.state;
     const { trackName, previewUrl, trackId } = music;
     return (
 
-      <Flex align="center">
+      <Flex
+        direction={ ['column', 'row', 'row', 'row'] }
+        align="center"
+      >
         <Text
           { ...PlayerMusicCard.baseStyle }
         >
           {trackName}
         </Text>
-        <audio
-          src={ previewUrl }
-          controls
-          style={ { height: '56px', width: '371px' } }
-        >
-          <track kind="captions" />
-          O seu navegador não suporta o elemento
-          <code>audio</code>
-          .
-        </audio>
+        <Flex align="center">
+          <audio
+            src={ previewUrl }
+            controls
+          >
+            <track kind="captions" />
+            O seu navegador não suporta o elemento
+            <code>audio</code>
+            .
+          </audio>
 
-        {isLoading
-          ? (
-            <Box
-              color="#003be5"
-              fontSize="11px"
-              fontWeight="400"
-              lineHeight="18px"
-            >
-              <Loading />
-            </Box>)
-          : (
-            <FormLabel
-              htmlFor={ `fav-${trackId}` }
-            >
-              <Checkbox
-                id={ `fav-${trackId}` }
-                data-testid={ `checkbox-music-${trackId}` }
-                isChecked={ isChecked }
-                onChange={ (event) => this.handleChange(event) }
-                style={ { display: 'none' } }
-              />
-              <Text ml="52px">
-                {
-                  isChecked
-                    ? (
-                      <AiFillHeart
-                        size={ 20 }
-                        color="#EC5050"
-                      />
-                    )
+          <FormLabel
+            htmlFor={ `fav-${trackId}` }
+          >
+            <Checkbox
+              id={ `fav-${trackId}` }
+              data-testid={ `checkbox-music-${trackId}` }
+              isChecked={ isChecked }
+              onChange={ (event) => this.handleChange(event) }
+              style={ { display: 'none' } }
+            />
+            <Text ml={ ['10px', '52px', '52px', '52px'] }>
+              {
+                isChecked
+                  ? (
+                    <AiFillHeart
+                      size={ 20 }
+                      color="#EC5050"
+                    />
+                  )
 
-                    : (
-                      <AiOutlineHeart
-                        size={ 20 }
-                      />
-                    )
-                }
-              </Text>
-            </FormLabel>
-          )}
-
+                  : (
+                    <AiOutlineHeart
+                      size={ 20 }
+                    />
+                  )
+              }
+            </Text>
+          </FormLabel>
+        </Flex>
       </Flex>
 
     );
