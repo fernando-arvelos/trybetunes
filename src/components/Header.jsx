@@ -38,7 +38,7 @@ class Header extends Component {
     const { nameUser, imageUser, loading } = this.state;
     return (
       <Flex
-        h={ ['600px', '85vh', '85vh', '100vh'] }
+        h={ { base: '85vh', lg: '100vh' } }
         w="250px"
         direction="column"
         align="center"
@@ -116,7 +116,7 @@ class Header extends Component {
                 mr="13px"
                 w="30px"
               />
-              <Loading color="#003BE5" size={ ['16px'] } />
+              <Loading color="#003BE5" size={ { base: '16px' } } />
             </Flex>
           ) : (
             <Flex align="center" ml="40px" h="50px">

@@ -49,7 +49,7 @@ class MusicCard extends Component {
     return (
 
       <Flex
-        direction={ ['column', 'row', 'row', 'row'] }
+        direction={ { base: 'column', md: 'row' } }
         align="center"
       >
         <Text
@@ -78,7 +78,7 @@ class MusicCard extends Component {
               onChange={ (event) => this.handleChange(event) }
               style={ { display: 'none' } }
             />
-            <Text ml={ ['10px', '52px', '52px', '52px'] }>
+            <Text ml={ { base: '10px', md: '52px' } }>
               {
                 isChecked
                   ? (

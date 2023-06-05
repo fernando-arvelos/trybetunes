@@ -19,7 +19,7 @@ class Album extends Component {
       musics: [],
       infoAlbum: {},
       isLoading: true,
-      isMobile: false,
+      isMobile: true,
     };
   }
 
@@ -59,7 +59,7 @@ class Album extends Component {
         <Flex
           align="flex-end"
           direction="column"
-          w={ ['100%', '100%', 'calc(100% - 250px)', 'calc(100% - 250px)'] }
+          w={ { base: '100%', lg: 'calc(100% - 250px)' } }
         >
 
           <Flex
@@ -77,7 +77,7 @@ class Album extends Component {
               >
                 <HiddenMenu />
               </Flex>)}
-            <Flex align={ ['center', 'normal', 'normal', 'normal'] }>
+            <Flex align={ { base: 'center', lg: 'normal' } }>
               {!isLoading
                 && (
                   <>
@@ -89,12 +89,12 @@ class Album extends Component {
                     <Flex
                       direction="column"
                       justify="flex-end"
-                      mt={ ['0px', '29px', '29px', '29px'] }
-                      w="218.4px"
+                      mt={ { base: '0px', lg: '29px' } }
+                      w={ { base: '218.4px', md: '330px' } }
                     >
                       <Text
                         color="white"
-                        fontSize={ ['15px', '20px', '20px', '20px'] }
+                        fontSize={ { base: '15px', md: '20px' } }
                         fontWeight="700"
                         lineHeight="150%"
                       >
@@ -102,7 +102,7 @@ class Album extends Component {
                       </Text>
                       <Text
                         color="white"
-                        fontSize={ ['10px', '14px,', '14px', '14px'] }
+                        fontSize={ { base: '12px', md: '14px' } }
                         fontWeight="400"
                         lineHeight="150%"
                       >
@@ -118,7 +118,7 @@ class Album extends Component {
             bg="#e4e9f0"
             minH="calc(100vh - 178px)"
             w="100%"
-            justify={ ['center', 'normal', 'normal', 'normal'] }
+            justify={ { base: 'center', lg: 'normal' } }
           >
             {isLoading
               ? (
@@ -126,14 +126,14 @@ class Album extends Component {
                   <Image
                     src={ ampulheta }
                     alt="ampulheta"
-                    boxSize={ ['30px', '30px', '50px', '50px'] }
+                    boxSize={ { base: '30px', md: '50px' } }
                   />
-                  <Loading color="#C0C3C9" size={ ['35px', '35px', '70px', '70px'] } />
+                  <Loading color="#C0C3C9" size={ { base: '35px', md: '70px' } } />
                 </Flex>)
               : (
                 <Flex
                   direction="column"
-                  m={ ['38px 0 0 0', '38px 0 0 323px'] }
+                  m={ { base: '38px 0 0 0', lg: '38px 0 0 323px' } }
                 >
                   { musics.map((music) => (
                     <Box key={ music.trackId }>

@@ -75,13 +75,13 @@ class Search extends Component {
         {!isMobile
           && <Header />}
         <Flex
-          w={ ['100%', '100%', 'calc(100% - 250px)', 'calc(100% - 250px)'] }
+          w={ { base: '100%', md: '100%', lg: 'calc(100% - 250px)' } }
           direction="column"
           align="flex-end"
           minH="100vh"
         >
           <Flex
-            justify={ ['none', 'none', 'center', 'center'] }
+            justify={ { base: 'none', md: 'none', lg: 'center' } }
             bgImage={ fundo1 }
             bgSize="cover"
             h="178px"
@@ -133,9 +133,12 @@ class Search extends Component {
                   <Image
                     src={ ampulheta }
                     alt="ampulheta"
-                    boxSize={ ['30px', '30px', '50px', '50px'] }
+                    boxSize={ { base: '30px', md: '50px', ls: '50px' } }
                   />
-                  <Loading color="#C0C3C9" size={ ['35px', '35px', '70px', '70px'] } />
+                  <Loading
+                    color="#C0C3C9"
+                    size={ { base: '35px', lg: '70px' } }
+                  />
                 </Flex>)
               : (
                 <Box w="100%">
@@ -145,7 +148,7 @@ class Search extends Component {
                         <Heading
                           as="h1"
                           color="#c0c3c9"
-                          fontSize={ ['15px', '15px', '30px', '30px'] }
+                          fontSize={ { base: '15px', md: '30px', lg: '30px' } }
                           fontWeight="400"
                         >
                           Nenhum álbum foi encontrado
@@ -161,7 +164,7 @@ class Search extends Component {
                           <Box mt="63px">
                             <Text
                               color="#003be5"
-                              fontSize={ ['15px', '15px', '20px', '20px'] }
+                              fontSize={ { base: '15px', md: '20px', lg: '20px' } }
                               fontStyle="italic"
                               fontWeight="300"
                               textAlign="center"
@@ -187,7 +190,7 @@ class Search extends Component {
                                 className="link"
                                 textDecor="none"
                                 _hover={ { textDecor: 'none' } }
-                                display={ ['flex', 'inline', 'inline', 'inline'] }
+                                display={ { base: 'flex', md: 'inline', lg: 'inline' } }
                               >
 
                                 <Image
@@ -196,16 +199,16 @@ class Search extends Component {
                                     `Imagem da capa do álbum ${album.collectionName}`
                                   }
                                   borderRadius="10px"
-                                  boxSize={ ['100px', '200px', '200px', '200px'] }
-                                  mr={ ['6px', '25px', '25px', '25px'] }
-                                  mb={ ['6px', '3px'] }
+                                  boxSize={ { base: '100px', md: '200px', lg: '200px' } }
+                                  mr={ { base: '6px', md: '25px', lg: '25px' } }
+                                  mb={ { base: '6px', md: '3px', lg: '3px' } }
                                   mixBlendMode="normal"
                                 />
                                 <Flex
                                   direction="column"
-                                  justify={ ['flex-end', 'flex-start'] }
-                                  w={ ['200px', '200px', '200px', '200px'] }
-                                  h={ ['100px', '60px', '60px', '60px'] }
+                                  justify={ { base: 'flex-end', md: 'flex-start' } }
+                                  w="200px"
+                                  h={ { base: '100px', md: '60px' } }
                                 >
                                   <Text
                                     fontWeight="700"

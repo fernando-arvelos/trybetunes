@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Box, Text } from '@chakra-ui/react';
-import { arrayOf, string } from 'prop-types';
+import { shape, string } from 'prop-types';
 
 class Loading extends Component {
   render() {
@@ -18,5 +18,9 @@ export default Loading;
 
 Loading.propTypes = {
   color: string.isRequired,
-  size: arrayOf(Number).isRequired,
+  size: shape({
+    base: string,
+    md: string,
+    lg: string,
+  }).isRequired,
 };
