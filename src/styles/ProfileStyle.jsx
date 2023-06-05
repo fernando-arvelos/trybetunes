@@ -1,0 +1,37 @@
+export const profileStyle = {
+  headingStyle: {
+    color: '#3d495c',
+    fontSize: '16px',
+    fontWeight: '700',
+    lineHeight: '150%',
+  },
+  textStyle: {
+    color: '#3d495c',
+    fontSize: '14px',
+    fontWeight: '400',
+    lineHeight: '150%',
+    w: '490px',
+  },
+  linkStyle: {
+    bgColor: '#003be5',
+    borderRadius: '100px',
+    color: 'white',
+    fontSize: '14px',
+    fontWeight: ' 700 ',
+    h: '40px',
+    letterSpacing: '0.03em',
+    p: '10px',
+    textAlign: 'center',
+    hover: 'none',
+    textTransform: 'uppercase',
+    w: '152px',
+  },
+  imageStyle: {
+    borderRadius: 'full',
+    dropShadow: '-9px 8px 8px rgba(68, 73, 85, 0.4)',
+    boxSize: { base: '158px', md: '230', lg: '256' },
+    m: { base: '100px 10px 0 0', md: '60px 45px 0 20px', lg: '50px 45px 0 78px' },
+    zIndex: '2',
+    mixBlendMode: 'normal',
+  },
+};

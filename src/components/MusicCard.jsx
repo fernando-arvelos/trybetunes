@@ -5,7 +5,6 @@ import { Flex, Text } from '@chakra-ui/layout';
 import { Checkbox, FormLabel } from '@chakra-ui/react';
 import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import { PlayerMusicCard } from '../styles/PlayerMusicCard';
-import '../css/MusicCard.css';
 
 class MusicCard extends Component {
   constructor() {

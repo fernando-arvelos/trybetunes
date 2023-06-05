@@ -7,7 +7,6 @@ import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import Loading from '../components/Loading';
 import ampulheta from '../img/ampulheta.gif';
-import '../css/Favorites.css';
 import HiddenMenu from '../components/HiddenMenu';
 
 class Favorites extends Component {

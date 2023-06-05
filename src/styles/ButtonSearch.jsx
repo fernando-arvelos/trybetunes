@@ -9,7 +9,7 @@ export const buttonSearch = {
     letterSpacing: '0.03em',
     textTransform: 'uppercase',
     w: '114px',
-    _hover: 'none',
+    hover: 'none',
   },
   disabledStyle: {
     bg: 'gray.400',
