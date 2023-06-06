@@ -1,12 +1,17 @@
 import { Component } from 'react';
 import { isEmail } from 'validator';
 import PropTypes from 'prop-types';
+import { Flex, Heading, Text } from '@chakra-ui/layout';
+import { Button, FormControl, Image, Input, Textarea } from '@chakra-ui/react';
 import { getUser, updateUser } from '../services/userAPI';
 import fundobranco from '../img/fundobranco.png';
+import fundo4 from '../img/fundo4.png';
 import Loading from '../components/Loading';
 import '../css/ProfileEdit.css';
 import Header from '../components/Header';
 import ampulheta from '../img/ampulheta.gif';
+import HiddenMenu from '../components/HiddenMenu';
+import { profileEditStyle } from '../styles/ProfileEditStyles';
 
 class ProfileEdit extends Component {
   constructor() {
@@ -21,12 +26,25 @@ class ProfileEdit extends Component {
         name: '',
       },
       disabledButton: true,
+      isMobile: true,
     };
   }
 
   componentDidMount() {
     this.getUserData();
+    this.checkIsMobile();
+    window.addEventListener('resize', this.checkIsMobile);
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.checkIsMobile);
+  }
+
+  checkIsMobile = () => {
+    const sizeScreen = 960;
+    const isMobile = window.innerWidth < sizeScreen;
+    this.setState({ isMobile });
+  };
 
   getUserData = async () => {
     const user = await getUser();
@@ -74,98 +92,147 @@ class ProfileEdit extends Component {
   };
 
   render() {
-    const { userData, isLoading, disabledButton } = this.state;
+    const { userData, isLoading, disabledButton, isMobile } = this.state;
     const { name, email, image, description } = userData;
     const number = 5;
+
     return (
-      <section className="section-master-profileedit">
-        <Header />
+      <Flex minH="100vh">
+        {!isMobile
+          && <Header />}
 
-        <section className="section-profileedit">
+        <Flex
+          align="flex-end"
+          direction="column"
+          w={ { base: '100%', lg: 'calc(100% - 250px)' } }
+        >
 
-          <div className="background-up-profileedit">
-            <div className="img-input-profile-edit">
-              {image.length > number
-                ? (
-                  <img
-                    src={ image }
-                    alt={ `Foto do usuário ${name}` }
-                  />)
-                : (
-                  <img src={ fundobranco } alt="" />
-                )}
+          <Flex
+            bgImage={ fundo4 }
+            bgSize="cover"
+            h="178px"
+            w="100%"
+          >
+            {isMobile
+            && (
+              <Flex m="10px 0 0 10px" zIndex="3">
+                <HiddenMenu />
+              </Flex>)}
+            <Flex justify={ { base: 'flex-end', md: 'normal' } } w="100%">
+              <Flex
+                { ...profileEditStyle.imgBoxStyle }
+              >
+                {image.length > number
+                  ? (
+                    <Image
+                      src={ image }
+                      alt={ `Foto do usuário ${name}` }
+                      { ...profileEditStyle.imgStyle }
+                    />)
+                  : (
+                    <Image
+                      src={ fundobranco }
+                      alt=""
+                      { ...profileEditStyle.imgStyle }
+                    />
+                  )}
 
-              {!isLoading
-                && <input
+                {!isLoading
+                && <Input
                   name="image"
                   type="text"
-                  placeholder="Insira um link da sua foto"
                   defaultValue={ image || '' }
                   onChange={ this.handleInputChange }
+                  { ...profileEditStyle.linkImage }
+                  _hover="none"
                 />}
-            </div>
-          </div>
+              </Flex>
+            </Flex>
+          </Flex>
 
-          <div className="background-down-profileedit">
+          <Flex
+            bg="#e4e9f0"
+            minH="calc(100vh - 178px)"
+            w="100%"
+          >
             {isLoading
               ? (
-                <div className="loading-profileedit">
-                  <img
+                <Flex align="center" justify="center" direction="column" w="100%">
+                  <Image
                     src={ ampulheta }
                     alt="ampulheta"
+                    boxSize={ { base: '30px', md: '50px' } }
                   />
-                  <Loading />
-                </div>
+                  <Loading color="#C0C3C9" size={ { base: '35px', md: '70px' } } />
+                </Flex>
               ) : (
-                <div className="edit-user-data">
-                  <form>
-                    <h1>Nome</h1>
-                    <p>Fique a vontade para usar seu nome social</p>
-                    <input
+                <Flex
+                  direction="column"
+                  m={ { base: '130px 10px 0 10px',
+                    md: '29px 10px 0 300px',
+                    lg: '29px 0 0 382px' } }
+                  w="100%"
+                >
+                  <FormControl>
+                    <Heading { ...profileEditStyle.h1Form }>Nome</Heading>
+                    <Text { ...profileEditStyle.textForm }>
+                      Fique a vontade para usar seu nome social
+                    </Text>
+                    <Input
                       type="text"
                       name="name"
                       placeholder="Digite seu nome"
                       data-testid="edit-input-name"
                       defaultValue={ name || '' }
                       onChange={ this.handleInputChange }
+                      _hover="none"
+                      { ...profileEditStyle.inputForm }
                     />
 
-                    <h1>E-mail</h1>
-                    <p>Escolha um e-mail que consulte diariamente</p>
-                    <input
+                    <Heading { ...profileEditStyle.h1Form }>E-mail</Heading>
+                    <Text { ...profileEditStyle.textForm }>
+                      Escolha um e-mail que consulte diariamente
+                    </Text>
+                    <Input
                       type="text"
                       name="email"
                       placeholder="user@email.com.br"
                       data-testid="edit-input-email"
                       defaultValue={ email || '' }
                       onChange={ this.handleInputChange }
+                      _hover="none"
+                      { ...profileEditStyle.inputForm }
                     />
 
-                    <h1>Descrição</h1>
-                    <textarea
+                    <Heading { ...profileEditStyle.h1Form }>Descrição</Heading>
+                    <Textarea
                       name="description"
                       placeholder="Sobre mim"
                       data-testid="edit-input-description"
                       defaultValue={ description || '' }
                       onChange={ this.handleInputChange }
+                      _hover="none"
+                      { ...profileEditStyle.textAreaForm }
                     />
                     <br />
 
-                    <button
+                    <Button
                       type="submit"
                       data-testid="edit-button-save"
-                      disabled={ disabledButton }
+                      isDisabled={ disabledButton }
                       onClick={ this.handleSubmit }
+                      _hover="none"
+                      { ...profileEditStyle.buttonForm }
                     >
                       Salvar
-                    </button>
-                  </form>
-                </div>
+                    </Button>
+                  </FormControl>
+                </Flex>
               )}
-          </div>
+          </Flex>
 
-        </section>
-      </section>
+        </Flex>
+      </Flex>
     );
   }
 }

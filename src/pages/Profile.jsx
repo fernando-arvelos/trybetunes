@@ -5,7 +5,6 @@ import { Flex, Heading, Link, Text } from '@chakra-ui/layout';
 import { getUser } from '../services/userAPI';
 import fundo4 from '../img/fundo4.png';
 import Loading from '../components/Loading';
-import '../css/Profile.css';
 import Header from '../components/Header';
 import ampulheta from '../img/ampulheta.gif';
 import { profileStyle } from '../styles/ProfileStyle';
